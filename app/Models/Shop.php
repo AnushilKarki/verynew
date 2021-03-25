@@ -172,4 +172,5 @@ class Shop extends Model
     {
         return $this->hasMany('App\Models\Inventory','shop_id');
     }
+    protected $fillable = ['name','is_active','description','email','contact_no'];
 }

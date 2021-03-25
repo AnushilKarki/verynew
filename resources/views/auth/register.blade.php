@@ -21,7 +21,7 @@
        @csrf 
        <div class="name">
           <label for="name">Name</label>
-          <input type="text" id="name" name="username" value="{{ old('username') }}" autofocus>
+          <input type="text" id="name" name="name" value="{{ old('username') }}" autofocus>
        </div>
        <div class="email">
           <label for="email">Email</label>

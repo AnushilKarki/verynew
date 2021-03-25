@@ -15,12 +15,13 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+          
             $table->enum('status',['pending','processing','completed','declined'])->default('pending');
             $table->float('grand_total')->nullable();
             $table->integer('item_count')->nullable();
             $table->boolean('is_paid')->default(false);
             $table->enum('payment_method',['cash_on_delivery','card','mobile_wallet'])->default('cash_on_delivery');
-
+            $table->string('order_number');
             $table->enum('order_type',['gift','shopping'])->default('shopping');
 
             $table->string('shipping_fullname')->nullable();

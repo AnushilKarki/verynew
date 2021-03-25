@@ -19,6 +19,9 @@ class CreateProductsTable extends Migration
             $table->string('brand_name')->nullable();
             $table->string('description')->nullable();
             $table->foreignId('shop_id')->references('id')->on('shops')->onDelete('cascade')->nullable();
+            $table->float('selling_price');
+            $table->float('cost_price');          
+            $table->string('image');
             $table->timestamps();
         });
     }

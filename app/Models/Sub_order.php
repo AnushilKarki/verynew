@@ -20,4 +20,5 @@ class Sub_order extends Model
     {
        return $this->belongsToMany('App\Models\Product','sub_order_items','sub_order_id','product_id')->withPivot('quantity','price');
     }
+    protected $fillable = ['order_id','shop_id','grand_total','item_count'];
 }
