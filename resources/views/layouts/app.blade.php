@@ -8,8 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-<div>
+<div id="app1">
+<example-component></example-component>
 @yield('content')
 </div>
+<script src="/js/app.js"></script>
 </body>
 </html>

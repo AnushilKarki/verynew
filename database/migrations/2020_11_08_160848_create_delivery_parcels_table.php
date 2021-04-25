@@ -19,7 +19,8 @@ class CreateDeliveryParcelsTable extends Migration
             $table->string('delivery_address');
             $table->string('pickup_contact_no');
             $table->string('delivery_contact_no');
-            $table->string('delivery_package')->default('standard');
+            $table->foreignId('delivery_package_id')->references('id')->on('delivery_packages')->onDelete('cascade')->nullable();
+            
             $table->string('particular')->nullable();
             $table->enum('available_time',['morning','day','evening','night'])->default('day');
             $table->float('total_amount_collection',8,2);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Order;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
@@ -111,12 +112,17 @@ class OrderController extends Controller
                 if(request('payment_method')=='paypal'){
                     return redirect()->route('paypal.checkout',$order->id);
                 }
+                //invoice pdf
+                $pdf = PDF::loadView('pdf.invoice',['cartitems'=>$cartitems]);
+                $pdf->setOrientation('landscape');
+                return $pdf->stream('invoice.pdf');
                 //empty the cart
+
                 \Cart::session(auth()->id())->clear();
                 //sent email to customer
         
                  //thank user for ordering        
-        
+                
                  return redirect()->route('home')->withMessage('Order has been placed');
           
     }

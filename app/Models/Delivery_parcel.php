@@ -33,4 +33,8 @@ class Delivery_parcel extends Model
     {
         return $this->hasOne('App\Models\Delivery_task','delivery_id');
     }
+    public function delivery_package()
+    {
+        return $this->belongsTo('App\Models\Delivery_package','delivery_package_id');
+    }
 }

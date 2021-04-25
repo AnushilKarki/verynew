@@ -8,6 +8,10 @@ use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BotManController;
+use App\Http\Controllers\SubOrderController;
+use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ComplainController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +29,7 @@ Route::get('/', [HomeController::class,'index'])->name('home');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
-    Route::get('/order/pay/{suborder}', 'SubOrderController@pay')->name('order.pay');
+    Route::get('/order/pay/{suborder}', [SubOrderController::class,'pay'])->name('order.pay');
 });
 
 Route::middleware(['auth'])->get('/home',function(){
@@ -72,14 +76,39 @@ Route::middleware(['auth'])->get('/paypal/checkout-cancel',[PayPalController::cl
 Route::get('/products/search', [ProductController::class,'search'])->name('products.search');
 
 
+Route::get('/products/searchbyprice', [ProductController::class,'searchbyprice'])->name('products.search.price');
 
 Route::resource('products', ProductController::class);
 
 Route::group(['prefix' => 'seller', 'middleware' => 'auth', 'as' => 'seller.', 'namespace' => 'Seller'], function () {
 
-    Route::redirect('/','seller/orders');
+    // Route::redirect('/','seller/orders');
 
-    Route::resource('/orders',  'OrderController');
+    // Route::resource('/orders',  'OrderController');
 
-    Route::get('/orders/delivered/{suborder}',  'OrderController@markDelivered')->name('order.delivered');
+    // Route::get('/orders/delivered/{suborder}',  [OrderController::class,'markDelivered'])->name('order.delivered');
 });
+Route::get('/invoicepdf',function(){
+    // $html = '<h1>hello pdf</h1>';
+    // $pdf = PDF::loadHtml($html);
+    // return $pdf->stream('invoice.pdf');
+//     $cartitems=\Cart::session(auth()->id())->getContent();
+//      $pdf = PDF::loadView('cart.index',$cartitems);
+//  return $pdf->stream('invoice.pdf');
+// $cartitems=\Cart::session(auth()->id())->getContent();
+// $pdf = PDF::loadView('pdf.invoice', $cartitems);
+// return $pdf->download('invoice.pdf');
+});
+Route::get('/exportuser',[ExportController::class,'exportuser']);
+
+Route::get('/test', function () {
+    event(new App\Events\OrderPlaced('Someone'));
+    
+    return "Event has been sent!";
+});
+Route::get('/event',function(){
+ event(new App\Events\OrderCompleted('how are you'));
+});
+
+Route::get('/complain',[ComplainController::class,'open']);
+Route::post('/complain',[ComplainController::class,'add'])->name('complain.store');

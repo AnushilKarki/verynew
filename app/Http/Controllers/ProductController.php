@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -37,6 +37,20 @@ class ProductController extends Controller
         $query = $request->input('query');
 
         $products = Product::where('name','LIKE',"%$query%")->paginate(10);
+
+        return view('product.catalog',compact('products'));
+    }
+
+    public function searchbyprice(Request $request)
+    {
+
+        $query = $request->input('query');
+
+        $products = Product::where('selling_price','LIKE',"%$query%")->paginate(10);
+        $users = DB::table('products')
+                ->where('votes', '=', 100)
+                ->where('age', '>', 35)
+                ->get();
 
         return view('product.catalog',compact('products'));
     }
