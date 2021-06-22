@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AttributeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/', [HomeController::class,'index'])->name('home');
+Route::post('/', [AttributeController::class,'store1'])->name('store');

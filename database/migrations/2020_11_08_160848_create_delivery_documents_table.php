@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeliveryParcelsTable extends Migration
+class CreateDeliveryDocumentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDeliveryParcelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('delivery_parcels', function (Blueprint $table) {
+        Schema::create('delivery_documents', function (Blueprint $table) {
             $table->id();
             $table->string('pickup_address');
             $table->string('delivery_address');
@@ -47,6 +47,6 @@ class CreateDeliveryParcelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('delivery_parcels');
+        Schema::dropIfExists('delivery_documents');
     }
 }

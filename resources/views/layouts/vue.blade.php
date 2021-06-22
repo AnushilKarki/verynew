@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="/ass/css/default-css.css">
     <link rel="stylesheet" href="/ass/css/styles.css">
     <link rel="stylesheet" href="/ass/css/responsive.css">
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
     <!-- modernizr css -->
     <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -35,7 +36,7 @@
     <!-- preloader area end -->
     <!-- page container area start -->
     <div class="page-container" id="app">
-        @yield('content')
+
         <!-- sidebar menu area start -->
         <div class="sidebar-menu">
             <div class="sidebar-header">
@@ -80,6 +81,9 @@
                         </audio>
                         
                         </li>
+                        <li>
+                        <router-link to="/example">Example</router-link>
+                        </li>
                         </ul>
                     </nav>
                 </div>
@@ -89,6 +93,7 @@
         <!-- main content area start -->
         <div class="main-content">
             <!-- header area start -->
+            
             <div class="header-area">
                 <div class="row align-items-center">
                     <!-- nav and search button -->
@@ -198,9 +203,8 @@
             <!-- page title area end -->
             <div class="main-content-inner">
                 <!-- MAIN CONTENT GOES HERE -->
-                <iframe width="420" height="315"
-src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1">
-</iframe>
+
+@yield('content')
             </div>
         </div>
         <!-- main content area end -->
@@ -296,6 +300,9 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1">
             </div>
         </div>
     </div>
+    <script>
+      const mountedApp = app.mount('#app')
+    </script>
     <script src="/js/app.js"></script>
     <!-- offset area end -->
     <!-- jquery latest version -->

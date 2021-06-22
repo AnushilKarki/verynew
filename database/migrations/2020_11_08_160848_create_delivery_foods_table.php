@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeliveryParcelsTable extends Migration
+class CreateDeliveryFoodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,19 @@ class CreateDeliveryParcelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('delivery_parcels', function (Blueprint $table) {
+        Schema::create('delivery_foods', function (Blueprint $table) {
             $table->id();
             $table->string('pickup_address');
             $table->string('delivery_address');
             $table->string('pickup_contact_no');
             $table->string('delivery_contact_no');
-            $table->foreignId('delivery_package_id')->references('id')->on('delivery_packages')->onDelete('cascade')->nullable();
-            
+            $table->foreignId('delivery_package_id')->references('id')->on('delivery_packages')->onDelete('cascade')->nullable();       
             $table->string('particular')->nullable();
-            $table->enum('available_time',['morning','day','evening','night'])->default('day');
+            $table->string('ready_time');
             $table->float('total_amount_collection',8,2)->nullable();
             $table->float('weight')->nullable();
             $table->float('km')->nullable();
+            $table->float('delivery_time')->nullable();
             $table->float('discount',8,2)->nullable();
             $table->float('delivery_charge',8,2)->nullable();
             $table->string('coupon')->nullable();
@@ -47,6 +47,6 @@ class CreateDeliveryParcelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('delivery_parcels');
+        Schema::dropIfExists('delivery_foods');
     }
 }

@@ -4,10 +4,18 @@
 @section('content')
 
 <div class="product-details ptb-100 pb-90">
+@foreach ($products as $product)
+
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-7 col-12">
                 <div class="product-details-5 pr-70">
+             
+    @if($product->multipleimage != null)
+     @foreach(json_decode($product->multipleimage) as $images)
+          <img src="{{ Voyager::image( $images ) }}" data-image="{{ $images }}" class="img-responsive">
+       @endforeach
+    @endif
                     <img src="/assets/img/product-details/l1-details-5.png" alt="">
                 </div>
             </div>
@@ -31,7 +39,23 @@
                     </div>
                     <p>{!! $product->description !!}</p>
 
-                    <div class="quickview-plus-minus">
+
+
+            <h5> colors :@foreach($colors as $c)
+    {{ $c }}
+@endforeach </h5>
+          
+           
+            <h5> size @foreach($sizes as $c)
+    {{ $c }}
+@endforeach  </h5>
+
+            <h5>quantity :@foreach($quantitys as $c)
+    {{ $c }}
+@endforeach</h5>
+           
+
+       <div class="quickview-plus-minus">
 
                         <div class="quickview-btn-cart">
                             <a class="btn-hover-black" href="{{route('cart.add', $product)}}">add to cart</a>
@@ -87,6 +111,7 @@
             </div>
         </div>
     </div>
+    @endforeach
 </div>
 
 {{-- reviews section --}}

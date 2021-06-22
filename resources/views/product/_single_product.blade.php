@@ -3,10 +3,15 @@
         <div class="product-img-3">
             <a href="{{route('products.show', $product)}}">
                 @if(!empty($product->image))
-                    <img src="{{asset('storage/'.$product->image)}}" alt="">
-                @else
-                    <img src="/assets/img/product/electro/1.jpg" alt="">
-                @endif
+            
+   
+          <img src="{{asset('storage/'.$product->image)}}" class="img-responsive">
+   
+    @endif
+                    
+            
+                    
+             
             </a>
             <div class="product-action-right">
                 <a class="animate-right" href="{{route('products.show', $product)}}" title="View">
@@ -30,7 +35,8 @@
             </div>
             <h4><a href="{{route('products.show', $product)}}">{{$product->name}}</a></h4>
             <span>{{$product->description}}</span>
-            <h5>$ {{$product->price}}</h5>
+            <h5> {{$product->price}}</h5>
+ 
         <p>{{$product->shop->owner->name ?? 'n/a'}}</p>
         </div>
     </div>

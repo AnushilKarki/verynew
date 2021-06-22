@@ -29,6 +29,7 @@ class CreateDeliveryHeadReportsTable extends Migration
             $table->integer('total_team_task_failed');
             $table->float('total_collected_amount');
             $table->enum('report_type',['yearly','monthly','weekly','daily']);
+            
             $table->timestamps();
         });
     }

@@ -28,6 +28,7 @@
         "pusher/pusher-php-server": "5.0",
         "symfony/cache": "^5.2",
         "tcg/voyager": "^1.4"
+      
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

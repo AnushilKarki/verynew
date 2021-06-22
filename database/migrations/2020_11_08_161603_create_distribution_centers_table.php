@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeliveriesTable extends Migration
+class CreateDistributionCentersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateDeliveriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('deliveries', function (Blueprint $table) {
+        Schema::create('distribution_centers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('team_id')->references('id')->on('teams')->onDelete('cascade')->nullable();
             $table->string('particular');
+            $table->string('location');
+            $table->string('contact');
             $table->text('objective')->nullable();
-            $table->string('area');
-            $table->enum('delivery_type',['standard','express','custom','emergency','others']);
-            $table->integer('duration')->nullable();
+            $table->enum('type',['pickndrop','warehouse','return','business','others']);
             $table->boolean('is_active')->default(true);
-            $table->text('task')->nullable();
             $table->timestamps();
         });
     }

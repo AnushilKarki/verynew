@@ -16,13 +16,18 @@ class CreateDeliveryPackagesTable extends Migration
         Schema::create('delivery_packages', function (Blueprint $table) {
             $table->id();
             $table->string('particular');
-            $table->enum('delivery_type',['package','food','document','ridesharing']);
+            $table->enum('delivery_type',['parcel','groceries','food','document','ridesharing','courier']);
             $table->float('delivery_rate')->nullable();
-            $table->integer('total_days')->nullable();
+            $table->float('delivery_max_rate')->nullable();
+            $table->float('delivery_rider_rate')->nullable();
+            $table->float('delivery_rider_max_rate')->nullable();
+            $table->string('total_days')->nullable();
+            $table->foreignId('area_id')->references('id')->on('areas')->onDelete('cascade')->nullable();
             $table->float('delivery_weight')->nullable();
             $table->float('delivery_distance')->nullable();
+            $table->float('hourly_rate')->nullable();
             $table->float('delivery_additional_rate')->nullable();
-            $table->enum('delivery_vehicle',['motorbike','cycle','electric','van','truck','taxi']);
+            $table->enum('delivery_vehicle',['motorbike','cycle','electric_bike','electric_car','van','truck','taxi','bus','other']);
             $table->timestamps();
         });
     }

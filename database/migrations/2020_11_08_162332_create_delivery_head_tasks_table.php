@@ -20,6 +20,7 @@ class CreateDeliveryHeadTasksTable extends Migration
             $table->enum('task_status',['pending','completed','failed'])->default('pending');
             $table->foreignId('shop_id')->references('id')->on('shops')->onDelete('cascade')->nullable();
             $table->foreignId('delivery_id')->references('id')->on('deliveries')->onDelete('cascade')->nullable();
+            $table->string('task')->nullable();
             $table->timestamps();
         });
     }

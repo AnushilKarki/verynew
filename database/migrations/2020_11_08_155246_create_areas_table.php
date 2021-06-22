@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeamsTable extends Migration
+class CreateAreasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateTeamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('teams', function (Blueprint $table) {
+        Schema::create('areas', function (Blueprint $table) {
             $table->id();
+            $table->string('area_name')->nullable(); 
+            $table->string('district')->nullable();
+            $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->float('km')->nullable();
+            $table->text('details')->nullable();
             $table->foreignId('shop_id')->references('id')->on('shops')->onDelete('cascade')->nullable();
-            $table->foreignId('area_id')->references('id')->on('areas')->onDelete('cascade')->nullable();
-            $table->string('team_name');
-            $table->integer('team_points');
-            $table->foreignId('team_leader_id')->references('id')->on('users')->onDelete('cascade')->nullable();
-            $table->string('contact_no');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
@@ -33,6 +34,6 @@ class CreateTeamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('areas');
     }
 }

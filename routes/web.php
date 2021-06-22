@@ -12,6 +12,7 @@ use App\Http\Controllers\BotManController;
 use App\Http\Controllers\SubOrderController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ComplainController;
+use App\Http\Controllers\AttributeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +31,11 @@ Route::get('/', [HomeController::class,'index'])->name('home');
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
     Route::get('/order/pay/{suborder}', [SubOrderController::class,'pay'])->name('order.pay');
+    Route::get('/product/attribute',[AttributeController::class,'view'])->name('admin.product.attribute.view');
+    Route::get('/product/attribute/{product}',[AttributeController::class,'add'])->name('admin.product.attribute.add');
+  
 });
+
 
 Route::middleware(['auth'])->get('/home',function(){
     return view('home');
@@ -112,3 +117,13 @@ Route::get('/event',function(){
 
 Route::get('/complain',[ComplainController::class,'open']);
 Route::post('/complain',[ComplainController::class,'add'])->name('complain.store');
+
+Route::post('/product/attribute/store',[AttributeController::class,'store1'])->name('product.attribute.store');
+
+Route::get('/leaflet',function(){
+    return view('leaflet');
+});
+
+Route::get('/leafletinput',function(){
+    return view('leafletinput');
+});

@@ -1,11 +1,14 @@
 <?php
 
+
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Stock;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 class ProductController extends Controller
 {
 
@@ -57,8 +60,40 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
+        $products = Product::where('id','LIKE',$product->id)->get();
+        $stocks = Stock::where('product_id','LIKE',$product->id)->get();
+       
+         
+// $colors = Str::of($color)->explode(' ');
+// $sizes = Str::of($quantity)->explode(' ');
+// $quantitys = Str::of($size)->explode(' ');
+FOREACH($stocks as $color){
+    $color = $color->color;
+}
+FOREACH($stocks as $size){
+    $size = $size->size;
+}
+FOREACH($stocks as $quantity){
+    $quantity = $quantity->quantity;
+}
 
-        return view('product.show', compact('product'));
+$colors = explode(',', $color);
+$sizes = explode(',', $size);
+$quantitys = explode(',', $quantity);
+// $col= 'blue';
+// $siz='5';
+// $n='0';
+// echo $quantitys[0];
+// for($i=0;$i<5;$i++)
+// {
+//     if($colors[$i]==$col && $sizes[$i]==$siz)
+//     {
+//         $quantitys[$i]=$quantitys[$]-1;
+//     }
+// }
+
+       
+        return view('product.show', compact('products','stocks','colors','sizes','quantitys'));
 
     }
 

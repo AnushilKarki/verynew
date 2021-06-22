@@ -19,7 +19,10 @@ class CreateRoutesTable extends Migration
             $table->string('ending_location');
             $table->string('route_name');
             $table->float('km')->nullable();
+            $table->float('count')->nullable();
             $table->text('details')->nullable();
+            $table->enum('time',['morning','day','evening','night']);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
